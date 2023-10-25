@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>musicoco</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Donnez 3 chansons :</h2>
+        <input type="text" id="userInput" placeholder="Donnez vos musiques :">
+        <div id="suggestions"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+<style>
+    body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    border: 1px solid #080808;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding : 50px
+}
+
+input {
+    width: 100%;
+    padding : 10px;
+    border: 1px solid #080808;
+    border-radius: 5px;
+}
+
+#suggestions {
+    margin-top: 10px;
+}
+
+</style>
+
+<script>const userInput = document.getElementById('userInput');
+    const suggestions = document.getElementById('suggestions');
+    
+    const sampleSuggestions = [
+        'Suggestion 1',
+        'Suggestion 2',
+        'Suggestion 3',
+        'Suggestion 4',
+        'Suggestion 5'
+    ];
+    
+    userInput.addEventListener('input', () => {
+        const inputText = userInput.value;
+        suggestions.innerHTML = '';
+    
+        if (inputText) {
+            const matchingSuggestions = sampleSuggestions.filter(suggestion =>
+                suggestion.toLowerCase().includes(inputText.toLowerCase())
+            );
+    
+            matchingSuggestions.forEach(suggestion => {
+                const suggestionItem = document.createElement('div');
+                suggestionItem.textContent = suggestion;
+                suggestions.appendChild(suggestionItem);
+            });
+        }
+    });
+    </script>
