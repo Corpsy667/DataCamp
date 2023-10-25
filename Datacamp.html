@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suggestion de texte</title>
+    <title>musicoco</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -51,31 +51,38 @@ input {
 
 </style>
 
-<script>const userInput = document.getElementById('userInput');
-    const suggestions = document.getElementById('suggestions');
-    
-    const sampleSuggestions = [
-        'Suggestion 1',
-        'Suggestion 2',
-        'Suggestion 3',
-        'Suggestion 4',
-        'Suggestion 5'
-    ];
-    
-    userInput.addEventListener('input', () => {
-        const inputText = userInput.value;
-        suggestions.innerHTML = '';
-    
-        if (inputText) {
-            const matchingSuggestions = sampleSuggestions.filter(suggestion =>
-                suggestion.toLowerCase().includes(inputText.toLowerCase())
-            );
-    
-            matchingSuggestions.forEach(suggestion => {
-                const suggestionItem = document.createElement('div');
-                suggestionItem.textContent = suggestion;
-                suggestions.appendChild(suggestionItem);
-            });
-        }
-    });
-    </script>
+<script>
+    // Exemple de base de données de musiques (peut être remplacé par une vraie DataFrame)
+const database = df2
+
+const userInput = document.getElementById('userInput');
+const suggestions = document.getElementById('suggestions');
+
+userInput.addEventListener('input', () => {
+    const inputText = userInput.value;
+    suggestions.innerHTML = '';
+
+    const userInput = document.getElementById('userInput');
+const suggestions = document.getElementById('suggestions');
+
+userInput.addEventListener('input', () => {
+    const inputText = userInput.value;
+    suggestions.innerHTML = '';
+
+    if (inputText) {
+        fetch(`/api/search?query=${inputText}`)
+            .then(response => response.json())
+            .then(data => {
+                data.slice(0, 3).forEach(item => {
+                    const suggestionItem = document.createElement('div');
+                    suggestionItem.textContent = `${item.title} - ${item.artist}`;
+                    suggestions.appendChild(suggestionItem);
+                });
+            })
+            .catch(error => console.error(error));
+    }
+
+});
+});
+
+</script>
