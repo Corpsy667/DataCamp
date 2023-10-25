@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>musicoco</title>
     <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <div class="container">
         <h2>Donnez 3 chansons :</h2>
         <input type="text" id="userInput" placeholder="Donnez vos musiques :">
+        <button type="submit">Rechercher</button>
         <div id="suggestions"></div>
     </div>
     <script src="script.js"></script>
+
 </body>
 </html>
 
@@ -23,7 +26,7 @@
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: #a07676;
 }
 
 
@@ -52,37 +55,30 @@ input {
 </style>
 
 <script>
-    // Exemple de base de données de musiques (peut être remplacé par une vraie DataFrame)
-const database = df2
-
-const userInput = document.getElementById('userInput');
-const suggestions = document.getElementById('suggestions');
-
-userInput.addEventListener('input', () => {
-    const inputText = userInput.value;
-    suggestions.innerHTML = '';
 
     const userInput = document.getElementById('userInput');
-const suggestions = document.getElementById('suggestions');
+        const suggestions = document.getElementById('suggestions');
+        const searchForm = document.getElementById('search-form');
 
-userInput.addEventListener('input', () => {
-    const inputText = userInput.value;
-    suggestions.innerHTML = '';
+        searchForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Empêcher la soumission du formulaire
 
-    if (inputText) {
-        fetch(`/api/search?query=${inputText}`)
-            .then(response => response.json())
-            .then(data => {
-                data.slice(0, 3).forEach(item => {
-                    const suggestionItem = document.createElement('div');
-                    suggestionItem.textContent = `${item.title} - ${item.artist}`;
-                    suggestions.appendChild(suggestionItem);
+            const query = userInput.value;
+
+            // Effectuer une requête GET vers l'API Flask
+            fetch(`/api/search?query=${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    suggestions.innerHTML = ''; // Effacer les anciennes suggestions
+                    data.slice(0, 3).forEach(item => {
+                        const suggestionItem = document.createElement('div');
+                        suggestionItem.textContent = `${item.Name} - ${item.Artist}`;
+                        suggestions.appendChild(suggestionItem);
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
                 });
-            })
-            .catch(error => console.error(error));
-    }
-
-});
-});
+        });
 
 </script>

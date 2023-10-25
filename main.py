@@ -37,3 +37,31 @@ if len(user_sentiments) != 0:
 
 else:
     print("il y a besoin d'au moins un élément pour que ça fonctionne")
+
+
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+# Exemple de base de données de musiques (remplacez par votre propre base de données)
+database = df
+
+@app.route('/api/search', methods=['GET'])
+def search_music():
+    try :
+        query = "database"
+        
+        # Par exemple, supposez que "database" est votre DataFrame
+        results = Cleaning_data.importing_data()
+        # Convertissez les résultats en un dictionnaire Python
+        suggestions = results.to_dict(orient='records')
+
+        # Renvoyez les suggestions au format JSON
+        return jsonify(suggestions)
+
+    except Exception as e:
+        app.logger.error(f"Erreur de recherche : {str(e)}")
+        return "Erreur interne du serveur", 500
+
+if __name__ == "__main__":
+    app.run()

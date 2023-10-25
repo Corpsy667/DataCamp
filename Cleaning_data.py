@@ -29,3 +29,5 @@ def remplace(texte, mot_remp):
     for mot in mot_remp:
         texte = texte.replace(mot, '-')
     return texte
+
+
