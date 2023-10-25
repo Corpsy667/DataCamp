@@ -15,9 +15,9 @@ def importing_data():
     mot_remp = ["(",")"]
     filtered_df.loc[:, 'Lyrics'] = filtered_df['Lyrics'].apply(lambda x: effacer_mots(x, mots_a_effacer))
     filtered_df.loc[:, 'Lyrics'] = filtered_df['Lyrics'].apply(lambda x: remplace(x, mot_remp))
-    print("filtered_df", filtered_df)
+    filtered_df = filtered_df.copy()
     filtered_df.loc[:, 'Sentiment'] = filtered_df['Lyrics'].apply(lambda x: TextBlob(x).sentiment.polarity)
-    print("filtered_df 2 ", filtered_df, df)
+    print("filtered_df", filtered_df)
     return filtered_df
 # Fonction pour effacer les mots
 def effacer_mots(texte, mots_a_effacer):
