@@ -39,14 +39,14 @@ else:
 
 
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+
 
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+
 
 # Exemple de base de données de musiques (remplacez par votre propre base de données)
-4
+
 data = Cleaning_data.importing_data()
 @app.route('/api/search', methods=['GET'])
 
@@ -57,19 +57,31 @@ def search_music():
         query = request.args.get('query')
         if query is not None:
             # Par exemple, supposez que "database" est votre DataFrame
-            results = data[data['Name'].str.lower().str.startswith(query.lower())]
-            suggestions = results.to_dict(orient='records')
+            results = data[data['Name'].str.lower().str.startswith(query.lower())][:3]
+            
+            suggestionsjson = results.to_dict(orient='records')
 
             # Renvoyez les suggestions au format JSON
-            return jsonify(suggestions)
+            return jsonify(suggestionsjson)
         else:
         # Gérez le cas où q4
         # uery est None
-            return jsonify(data_dict)
+            return jsonify([])
 
     except Exception as e:
         app.logger.error(f"Erreur de recherche : {str(e)}")
         return "Erreur interne du serveur", 500
+
+
+
+@app.route('/api/data', methods=['GET'])
+def get_data():
+    # Vous pouvez ici obtenir les données à partir de votre source de données
+    data = {
+        'key1': '1',
+        'key2': 'valeur2'
+    }
+    return jsonify(data)
 
 if __name__ == "__main__":
     app.run()

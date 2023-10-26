@@ -14,6 +14,9 @@
         <input type="text" id="userInput" placeholder="Donnez vos musiques :">
         <button type="submit">Rechercher</button>
         </form>
+        <div id="search-results">
+            <!-- Les résultats de la recherche seront affichés ici -->
+        </div>
         <div id="suggestions"></div>
     </div>
     
@@ -58,30 +61,59 @@ input {
 
 <script>
 
+fetch('http://localhost:5000/api/data' , {mode : 'no-cors'})
+    .then(response => response.json())
+    .then(data => {
+        // Les données sont maintenant disponibles dans la variable 'data'
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Erreur lors de la récupération des données :', error);
+    });
+
     const userInput = document.getElementById('userInput');
     const suggestions = document.getElementById('suggestions');
         const searchForm = document.getElementById('search-form');
+        const searchResults = document.getElementById('search-results');
 
-        searchForm.addEventListener('submit', search_music => {
+        searchForm.addEventListener('submit', async (event) => {
             console.log("todo bien");
             event.preventDefault(); // Empêcher la soumission du formulaire
 
             const query = userInput.value;
+            const response = await  fetch(`http://localhost:5000/api/search?query=${query}`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        mode: 'no-cors', // Active les requêtes CORS
+    })
 
-            // Effectuer une requête GET vers l'API Flask
-            fetch('http://localhost:5000/api/search?query=' + query)
-                .then(response => response.json())
-                .then(data => {
-                    suggestions.innerHTML = ''; // Effacer les anciennes suggestions
-                    data.forEach(item => {
-                        const suggestionItem = document.createElement('div');
-                        suggestionItem.textContent = `${item.Name} - ${item.Artist}`;
-                        suggestions.appendChild(suggestionItem);
-                    });
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        });
+    const searchResultsItem = document.createElement('div');
+                searchResultsItem.textContent = `${response.text}`;
+                searchResults.appendChild(searchResultsItem);
+        const data = await response.json();
+        console.log(data); // Affiche la réponse JSON dans la console
+
+        // Supprime les anciens résultats
+        searchResults.innerHTML = '';
+
+        if (data.length > 0) {
+            // Traitez les données JSON et affichez-les dans searchResults
+            data.forEach(item => {
+                const searchResultsItem = document.createElement('div');
+                searchResultsItem.textContent = `${item.Name} - ${item.Artist}`;
+                searchResults.appendChild(searchResultsItem);
+            });
+        } else {
+            // Gérez le cas où aucune donnée n'a été trouvée
+            const noResultsItem = document.createElement('div');
+            noResultsItem.textContent = 'Aucun résultat trouvé';
+            searchResults.appendChild(noResultsItem);
+        }
+     
+    
+});
 
 </script>
