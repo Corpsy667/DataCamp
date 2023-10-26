@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>musicoco</title>
-    <link rel="stylesheet" href="styles.css">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <div class="container">
         <h2>Donnez 3 chansons :</h2>
+        <form id="search-form">
         <input type="text" id="userInput" placeholder="Donnez vos musiques :">
         <button type="submit">Rechercher</button>
+        </form>
         <div id="suggestions"></div>
     </div>
-    <script src="script.js"></script>
+    
 
 </body>
 </html>
@@ -57,20 +59,21 @@ input {
 <script>
 
     const userInput = document.getElementById('userInput');
-        const suggestions = document.getElementById('suggestions');
+    const suggestions = document.getElementById('suggestions');
         const searchForm = document.getElementById('search-form');
 
-        searchForm.addEventListener('submit', (event) => {
+        searchForm.addEventListener('submit', search_music => {
+            console.log("todo bien");
             event.preventDefault(); // Empêcher la soumission du formulaire
 
             const query = userInput.value;
 
             // Effectuer une requête GET vers l'API Flask
-            fetch(`/api/search?query=${query}`)
+            fetch('http://localhost:5000/api/search?query=' + query)
                 .then(response => response.json())
                 .then(data => {
                     suggestions.innerHTML = ''; // Effacer les anciennes suggestions
-                    data.slice(0, 3).forEach(item => {
+                    data.forEach(item => {
                         const suggestionItem = document.createElement('div');
                         suggestionItem.textContent = `${item.Name} - ${item.Artist}`;
                         suggestions.appendChild(suggestionItem);
