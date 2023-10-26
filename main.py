@@ -43,7 +43,7 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 # Exemple de base de données de musiques (remplacez par votre propre base de données)
-database = df
+4
 
 @app.route('/api/search', methods=['GET'])
 def search_music():
