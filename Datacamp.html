@@ -7,13 +7,20 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+<header>
+    <h1 id="titre">Musicoco</h1>
+</header>
 <body>
     <div class="container">
-        <h2>Donnez 3 chansons :</h2>
+        <h2>Musique ou Artiste :</h2>
         <form id="search-form">
-        <input type="text" id="userInput" placeholder="Donnez vos musiques :">
-        <button type="submit">Rechercher</button>
+            <div class="search-container">
+                <input type="text" id="userInput" placeholder="Donnez vos musiques :">
+                <button type="submit">Rechercher</button>
+            </div>
         </form>
+        
+        
         <div id="suggestions_artistes"></div>
     </div>
    
@@ -35,13 +42,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: auto;
     margin: 0;
     background-color: #a07676;
     flex-direction: column;
 }
+.search-container {
+    display: flex; /* Utilise un modèle de boîte flexible pour aligner les éléments horizontalement */
+    align-items: center; /* Centre verticalement les éléments dans le conteneur */
+    gap: 10px; /* Ajoute un espace de 10 pixels entre les éléments */
+}
 
-
+#titre{
+    font-size : 60px;
+    font-style : italic ;
+}
 .container {
     display: flex;
     justify-content: center;
@@ -53,21 +68,33 @@
 .container2 {
     height : auto + 50px;
     justify-content: center;
-    border-radius: 5px;
+    border-radius: 10px;
     border: 1px solid #080808;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     width: 1000px ;
+    background-color: aliceblue;
+    
 }
 
 input {
-    width: 100%;
-    padding : 10px;
+   
+    margin-top: 23px;
+    margin-left: 5px;
     border: 1px solid #080808;
     border-radius: 5px;
+    height: 26px;
+    width: 228.222;
+    margin-top: 20px;
 }
 
 #suggestions {
     margin-top: 10px;
+}
+button {
+    color :teal ;
+    margin-top: 23px;
+    
+
 }
 #search-results{
     background-color: aliceblue;
