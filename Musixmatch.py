@@ -39,6 +39,7 @@ def search_lyrics(track_name, artist_name):
 
 
 # Utilisation de la fonction pour rechercher les paroles d'une chanson
+
 track_name = "HAPPY"
 artist_name = "NF"
 lyrics = search_lyrics(track_name, artist_name)
