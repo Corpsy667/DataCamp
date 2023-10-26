@@ -14,12 +14,12 @@
         <input type="text" id="userInput" placeholder="Donnez vos musiques :">
         <button type="submit">Rechercher</button>
         </form>
-        <div id="search-results">
-            <!-- Les résultats de la recherche seront affichés ici -->
-        </div>
         <div id="suggestions"></div>
     </div>
-    
+   
+    <h3> Propositions :</h3>
+        <div id="search-results" class="container2">
+        </div>
 
 </body>
 </html>
@@ -32,9 +32,8 @@
     height: 100vh;
     margin: 0;
     background-color: #a07676;
+    flex-direction: column;
 }
-
-
 
 
 .container {
@@ -44,6 +43,14 @@
     border: 1px solid #080808;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     padding : 50px
+}
+.container2 {
+    height : auto + 50px;
+    justify-content: center;
+    border-radius: 5px;
+    border: 1px solid #080808;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 1000px ;
 }
 
 input {
@@ -56,20 +63,18 @@ input {
 #suggestions {
     margin-top: 10px;
 }
+#search-results{
+    background-color: aliceblue;
+    border-radius: 2px;
+    border-color :#080808;
+    display : inline;
+    align-items: center;
 
+}
 </style>
 
 <script>
 
-fetch('http://localhost:5000/api/data' , {mode : 'no-cors'})
-    .then(response => response.json())
-    .then(data => {
-        // Les données sont maintenant disponibles dans la variable 'data'
-        console.log(data);
-    })
-    .catch(error => {
-        console.error('Erreur lors de la récupération des données :', error);
-    });
 
     const userInput = document.getElementById('userInput');
     const suggestions = document.getElementById('suggestions');
@@ -85,35 +90,35 @@ fetch('http://localhost:5000/api/data' , {mode : 'no-cors'})
         method: 'GET',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
+            //'Content-Type': 'application/json',
         },
-        mode: 'no-cors', // Active les requêtes CORS
+        mode: 'cors', // Active les requêtes CORS
     })
+    if (response.ok) {
+            const jsonData = await response.json();
+            const displayArea = document.getElementById("search-results");
 
-    const searchResultsItem = document.createElement('div');
-                searchResultsItem.textContent = `${response.text}`;
-                searchResults.appendChild(searchResultsItem);
-        const data = await response.json();
-        console.log(data); // Affiche la réponse JSON dans la console
+            if (Array.isArray(jsonData)) {
+                displayArea.innerHTML = ''; // Clear previous results
 
-        // Supprime les anciens résultats
-        searchResults.innerHTML = '';
+                jsonData.forEach(item => {
+                    if (item.hasOwnProperty("Name")) {
+                        const nameElement = document.createElement("p");
+                        nameElement.textContent = "Name: " + item.Name;
+                        displayArea.appendChild(nameElement);
 
-        if (data.length > 0) {
-            // Traitez les données JSON et affichez-les dans searchResults
-            data.forEach(item => {
-                const searchResultsItem = document.createElement('div');
-                searchResultsItem.textContent = `${item.Name} - ${item.Artist}`;
-                searchResults.appendChild(searchResultsItem);
-            });
-        } else {
-            // Gérez le cas où aucune donnée n'a été trouvée
-            const noResultsItem = document.createElement('div');
-            noResultsItem.textContent = 'Aucun résultat trouvé';
-            searchResults.appendChild(noResultsItem);
+                        const albumElement = document.createElement("p");
+                        albumElement.textContent = "Album: " + item.Album;
+                        displayArea.appendChild(albumElement);
+
+                        const artistElement = document.createElement("p");
+                        artistElement.textContent = "Artist: " + item.Artist;
+                        displayArea.appendChild(artistElement);
+                    }
+                });
+            } else {
+                displayArea.textContent = "JSON data is not an array.";
+            }
         }
-     
-    
-});
-
+    });
 </script>

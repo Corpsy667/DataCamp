@@ -53,7 +53,6 @@ data = Cleaning_data.importing_data()
 def search_music():
     try :
         query = " "
-        data_dict = data.to_dict(orient='records')
         query = request.args.get('query')
         if query is not None:
             # Par exemple, supposez que "database" est votre DataFrame
@@ -62,26 +61,17 @@ def search_music():
             suggestionsjson = results.to_dict(orient='records')
 
             # Renvoyez les suggestions au format JSON
-            return jsonify(suggestionsjson)
+            return jsonify(suggestionsjson) , {'Connection': 'keep-alive'}
         else:
         # Gérez le cas où q4
         # uery est None
-            return jsonify([])
+            return jsonify([]) , {'Connection': 'keep-alive'}
 
     except Exception as e:
         app.logger.error(f"Erreur de recherche : {str(e)}")
         return "Erreur interne du serveur", 500
 
 
-
-@app.route('/api/data', methods=['GET'])
-def get_data():
-    # Vous pouvez ici obtenir les données à partir de votre source de données
-    data = {
-        'key1': '1',
-        'key2': 'valeur2'
-    }
-    return jsonify(data)
 
 if __name__ == "__main__":
     app.run()

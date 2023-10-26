@@ -11,7 +11,7 @@ def importing_data():
     filtered_df = df[mask]
     filtered_df.reset_index(inplace = True)
     filtered_df.drop(labels = "index", axis = 1)
-    mots_a_effacer = ['\n', 'Verse 1]', '[Verse 2]',"[Verse 3]","[Outro]","[Chorus]", "[Intro]","Intro]","Chorus]","[Drop]","]","[","    ","'   "]
+    mots_a_effacer = ['\n', 'Verse 1]', '[Verse 2]',"[Verse 3]","[Outro]","[Chorus]", "[Intro]","Intro]","Chorus]","[Drop]","]","[","    ","'   ",'\r']
     mot_remp = ["(",")"]
     filtered_df.loc[:, 'Lyrics'] = filtered_df['Lyrics'].apply(lambda x: effacer_mots(x, mots_a_effacer))
     filtered_df.loc[:, 'Lyrics'] = filtered_df['Lyrics'].apply(lambda x: remplace(x, mot_remp))
