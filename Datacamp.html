@@ -14,11 +14,17 @@
         <input type="text" id="userInput" placeholder="Donnez vos musiques :">
         <button type="submit">Rechercher</button>
         </form>
-        <div id="suggestions"></div>
+        <div id="suggestions_artistes"></div>
     </div>
    
     <h3> Propositions :</h3>
         <div id="search-results" class="container2">
+        </div>
+        <h3> Propositions artistes :</h3>
+        <div id="propositions_artistes" class="container2">
+        </div>
+        <h3> Propositions mood :</h3>
+        <div id="propositions_mood" class="container2">
         </div>
 
 </body>
@@ -77,11 +83,14 @@ input {
 
 
     const userInput = document.getElementById('userInput');
-    const suggestions = document.getElementById('suggestions');
-        const searchForm = document.getElementById('search-form');
-        const searchResults = document.getElementById('search-results');
+    const suggestions_artiste = document.getElementById('suggestions_artistes');
+    const propositions_artistes = document.getElementById('propositions_artistes');
+    const propositions_mood = document.getElementById('propositions_mood');
+    const searchForm = document.getElementById('search-form');
+    const searchResults = document.getElementById('search-results');
 
         searchForm.addEventListener('submit', async (event) => {
+            
             console.log("todo bien");
             event.preventDefault(); // Empêcher la soumission du formulaire
 
@@ -121,4 +130,125 @@ input {
             }
         }
     });
+    searchForm.addEventListener('submit', async (event) => {
+            console.log("todo bien");
+            event.preventDefault(); // Empêcher la soumission du formulaire
+
+            const query = userInput.value;
+            const response = await  fetch(`http://localhost:5000/api/search-auteur?query=${query}`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            //'Content-Type': 'application/json',
+        },
+        mode: 'cors', // Active les requêtes CORS
+    })
+    if (response.ok) {
+            const jsonData = await response.json();
+            const displayArea = document.getElementById("search-results");
+
+            if (Array.isArray(jsonData)) {
+                //displayArea.innerHTML = '';
+
+                jsonData.forEach(item => {
+                    if (item.hasOwnProperty("Name")) {
+                        const nameElement = document.createElement("p");
+                        nameElement.textContent = "Name: " + item.Name;
+                        displayArea.appendChild(nameElement);
+
+                        const albumElement = document.createElement("p");
+                        albumElement.textContent = "Album: " + item.Album;
+                        displayArea.appendChild(albumElement);
+
+                        const artistElement = document.createElement("p");
+                        artistElement.textContent = "Artist: " + item.Artist;
+                        displayArea.appendChild(artistElement);
+                    }
+                });
+            } else {
+                displayArea.textContent = "JSON data is not an array.";
+            }
+        }
+    });
+
+    searchForm.addEventListener('submit', async (event) => {
+            console.log("todo bien");
+            event.preventDefault(); // Empêcher la soumission du formulaire
+
+            const query = userInput.value;
+            const response = await  fetch(`http://localhost:5000/api/propose-auteur?query=${query}`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            //'Content-Type': 'application/json',
+        },
+        mode: 'cors', // Active les requêtes CORS
+    })
+    if (response.ok) {
+            const jsonData = await response.json();
+            const displayArea = document.getElementById("propositions_artistes");
+
+            if (Array.isArray(jsonData)) {
+                displayArea.innerHTML = '';
+                jsonData.forEach(item => {
+                    if (item.hasOwnProperty("Name")) {
+                        const nameElement = document.createElement("p");
+                        nameElement.textContent = "Name: " + item.Name;
+                        displayArea.appendChild(nameElement);
+
+                        const albumElement = document.createElement("p");
+                        albumElement.textContent = "Album: " + item.Album;
+                        displayArea.appendChild(albumElement);
+
+                        const artistElement = document.createElement("p");
+                        artistElement.textContent = "Artist: " + item.Artist;
+                        displayArea.appendChild(artistElement);
+                    }
+                });
+            } else {
+                displayArea.textContent = "JSON data is not an array.";
+            }
+        }
+    });
+    searchForm.addEventListener('submit', async (event) => {
+            console.log("todo bien");
+            event.preventDefault(); // Empêcher la soumission du formulaire
+
+            const query = userInput.value;
+            const response = await  fetch(`http://localhost:5000/api/propose-feeling?query=${query}`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            //'Content-Type': 'application/json',
+        },
+        mode: 'cors', // Active les requêtes CORS
+    })
+    if (response.ok) {
+            const jsonData = await response.json();
+            const displayArea = document.getElementById("propositions_mood");
+
+            if (Array.isArray(jsonData)) {
+                displayArea.innerHTML = '';
+                jsonData.forEach(item => {
+                    if (item.hasOwnProperty("Name")) {
+                        const nameElement = document.createElement("p");
+                        nameElement.textContent = "Name: " + item.Name;
+                        displayArea.appendChild(nameElement);
+
+                        const albumElement = document.createElement("p");
+                        albumElement.textContent = "Album: " + item.Album;
+                        displayArea.appendChild(albumElement);
+
+                        const artistElement = document.createElement("p");
+                        artistElement.textContent = "Artist: " + item.Artist;
+                        displayArea.appendChild(artistElement);
+                    }
+                });
+            } else {
+                displayArea.textContent = "JSON data is not an array.";
+            }
+        }
+    });
+
+
 </script>
