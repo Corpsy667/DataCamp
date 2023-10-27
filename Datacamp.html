@@ -292,7 +292,6 @@
         const query = userInput.value;
         const query2 = userInput2.value;
         //console.log(query2==="")
-        if ((query2 !== "") && (query !== "")) {
             const response = await fetch(`http://localhost:5000/api/pop?query=${query}&query2=${query2}`, {
                 method: 'GET',
                 headers: {
@@ -323,7 +322,7 @@
                 }
             }
         }
-    });
+    );
 
 
 </script>
