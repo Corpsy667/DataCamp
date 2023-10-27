@@ -4,110 +4,129 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>musicoco</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <header>
     <h1 id="titre">Musicoco</h1>
 </header>
 <body>
-    <div class="container">
-        <h2>Musique ou Artiste :</h2>
-        <form id="search-form">
-            <div class="search-container">
-                <input type="text" id="userInput" placeholder="Donnez vos musiques :">
-                <input type="text" id="userInput2" placeholder="Donnez vos musiques :">
-                <button type="submit">Rechercher</button>
-            </div>
-        </form>
-        
-        
-        <div id="suggestions_artistes"></div>
-    </div>
-   
-    <h3> Propositions :</h3>
-        <div id="search-results" class="container2">
+<div class="container">
+    <h2>Musique et/ou Artiste :</h2>
+    <form id="search-form">
+        <div class="search-container">
+            <input type="text" id="userInput" placeholder="Titre ou artiste">
+            <input type="text" id="userInput2" placeholder="Donne un(e) artiste">
+            <button type="submit">Rechercher</button>
         </div>
-        <h3> Propositions artistes :</h3>
-        <div id="propositions_artistes" class="container2">
-        </div>
-        <h3> Propositions mood :</h3>
-        <div id="propositions_mood" class="container2">
-        </div>
-        <h3> Propositions popularité :</h3>
-        <div id="propositions_pop" class="container2">
-        </div>
+    </form>
+
+
+    <div id="suggestions_artistes"></div>
+</div>
+<h3> Propositions :</h3>
+<div id="search-results" class="container2">
+    <div class="container3"></div>
+</div>
+<h3> Propositions artistes :</h3>
+<div id="propositions_artistes" class="container2">
+    <div class="container3"></div>
+
+</div>
+<h3> Propositions mood :</h3>
+<div id="propositions_mood" class="container2">
+    <div class="container3"></div>
+
+</div>
+<h3> Propositions popularité :</h3>
+<div id="propositions_pop" class="container2">
+    <div class="container3"></div>
+
+</div>
 
 </body>
 </html>
 
 <style>
     body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-    margin: 0;
-    background-color: #a07676;
-    flex-direction: column;
-}
-.search-container {
-    display: flex; /* Utilise un modèle de boîte flexible pour aligner les éléments horizontalement */
-    align-items: center; /* Centre verticalement les éléments dans le conteneur */
-    gap: 10px; /* Ajoute un espace de 10 pixels entre les éléments */
-}
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        margin: 0;
+        background-color: #a07676;
+        flex-direction: column;
+        font-family: 'Arial', sans-serif;
+    }
 
-#titre{
-    font-size : 60px;
-    font-style : italic ;
-}
-.container {
-    display: flex;
-    justify-content: center;
-    border-radius: 5px;
-    border: 1px solid #080808;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding : 50px
-}
-.container2 {
-    height : auto + 50px;
-    justify-content: center;
-    border-radius: 10px;
-    border: 1px solid #080808;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 1000px ;
-    background-color: aliceblue;
-    
-}
+    .search-container {
+        display: flex; /* Utilise un modèle de boîte flexible pour aligner les éléments horizontalement */
+        align-items: center; /* Centre verticalement les éléments dans le conteneur */
+        gap: 10px; /* Ajoute un espace de 10 pixels entre les éléments */
+    }
 
-input {
-   
-    margin-top: 23px;
-    margin-left: 5px;
-    border: 1px solid #080808;
-    border-radius: 5px;
-    height: 26px;
-    width: 228.222;
-    margin-top: 20px;
-}
+    #titre {
+        font-size: 60px;
+        font-style: italic;
+    }
 
-#suggestions {
-    margin-top: 10px;
-}
-button {
-    color :teal ;
-    margin-top: 23px;
-    
+    .container {
+        display: flex;
+        justify-content: center;
+        border-radius: 5px;
+        border: 1px solid #080808;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        padding: 50px
+    }
 
-}
-#search-results{
-    background-color: aliceblue;
-    border-radius: 2px;
-    border-color :#080808;
-    display : inline;
-    align-items: center;
+    .container2 {
 
-}
+        height: auto+50px;
+        justify-content: center;
+        border-radius: 10px;
+        border: 1px solid #080808;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        width: 1000px;
+        background-color: lightcyan;
+
+    }
+
+    .container3 {
+        border-radius: 10px;
+        border: 1px brown;
+    }
+
+    input {
+
+        margin-top: 23px;
+        margin-left: 5px;
+        border: 1px solid #080808;
+        border-radius: 5px;
+        height: 26px;
+        width: 228.222;
+        margin-top: 20px;
+    }
+
+    #suggestions {
+        margin-top: 10px;
+    }
+
+    button {
+        color: teal;
+        margin-top: 23px;
+
+
+    }
+
+    #search-results {
+        background-color: lightcyan;
+        border-radius: 2px;
+        border-color: #080808;
+        display: inline;
+        align-items: center;
+
+    }
+
 </style>
 
 <script>
@@ -115,28 +134,23 @@ button {
 
     const userInput = document.getElementById('userInput');
     const userInput2 = document.getElementById('userInput2');
-    const propositions_pop = document.getElementById('propositions_pop');
-    const suggestions_artiste = document.getElementById('suggestions_artistes');
-    const propositions_artistes = document.getElementById('propositions_artistes');
-    const propositions_mood = document.getElementById('propositions_mood');
     const searchForm = document.getElementById('search-form');
-    const searchResults = document.getElementById('search-results');
 
-        searchForm.addEventListener('submit', async (event) => {
-            
-            console.log("todo bien");
-            event.preventDefault(); // Empêcher la soumission du formulaire
+    searchForm.addEventListener('submit', async (event) => {
 
-            const query = userInput.value;
-            const response = await  fetch(`http://localhost:5000/api/search?query=${query}`, {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            //'Content-Type': 'application/json',
-        },
-        mode: 'cors', // Active les requêtes CORS
-    })
-    if (response.ok) {
+        //console.log("todo bien");
+        event.preventDefault(); // Empêcher la soumission du formulaire
+
+        const query = userInput.value;
+        const response = await fetch(`http://localhost:5000/api/search?query=${query}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                //'Content-Type': 'application/json',
+            },
+            mode: 'cors', // Active les requêtes CORS
+        })
+        if (response.ok) {
             const jsonData = await response.json();
             const displayArea = document.getElementById("search-results");
 
@@ -149,9 +163,6 @@ button {
                         nameElement.textContent = "Name: " + item.Name;
                         displayArea.appendChild(nameElement);
 
-                        const albumElement = document.createElement("p");
-                        albumElement.textContent = "Album: " + item.Album;
-                        displayArea.appendChild(albumElement);
 
                         const artistElement = document.createElement("p");
                         artistElement.textContent = "Artist: " + item.Artist;
@@ -164,19 +175,19 @@ button {
         }
     });
     searchForm.addEventListener('submit', async (event) => {
-            console.log("todo bien");
-            event.preventDefault(); // Empêcher la soumission du formulaire
+        //console.log("todo bien");
+        event.preventDefault(); // Empêcher la soumission du formulaire
 
-            const query = userInput.value;
-            const response = await  fetch(`http://localhost:5000/api/search-auteur?query=${query}`, {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            //'Content-Type': 'application/json',
-        },
-        mode: 'cors', // Active les requêtes CORS
-    })
-    if (response.ok) {
+        const query = userInput.value;
+        const response = await fetch(`http://localhost:5000/api/search-auteur?query=${query}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                //'Content-Type': 'application/json',
+            },
+            mode: 'cors', // Active les requêtes CORS
+        })
+        if (response.ok) {
             const jsonData = await response.json();
             const displayArea = document.getElementById("search-results");
 
@@ -189,9 +200,6 @@ button {
                         nameElement.textContent = "Name: " + item.Name;
                         displayArea.appendChild(nameElement);
 
-                        const albumElement = document.createElement("p");
-                        albumElement.textContent = "Album: " + item.Album;
-                        displayArea.appendChild(albumElement);
 
                         const artistElement = document.createElement("p");
                         artistElement.textContent = "Artist: " + item.Artist;
@@ -205,19 +213,19 @@ button {
     });
 
     searchForm.addEventListener('submit', async (event) => {
-            console.log("todo bien");
-            event.preventDefault(); // Empêcher la soumission du formulaire
+        //console.log("todo bien");
+        event.preventDefault(); // Empêcher la soumission du formulaire
 
-            const query = userInput.value;
-            const response = await  fetch(`http://localhost:5000/api/propose-auteur?query=${query}`, {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            //'Content-Type': 'application/json',
-        },
-        mode: 'cors', // Active les requêtes CORS
-    })
-    if (response.ok) {
+        const query = userInput.value;
+        const response = await fetch(`http://localhost:5000/api/propose-auteur?query=${query}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                //'Content-Type': 'application/json',
+            },
+            mode: 'cors', // Active les requêtes CORS
+        })
+        if (response.ok) {
             const jsonData = await response.json();
             const displayArea = document.getElementById("propositions_artistes");
 
@@ -229,9 +237,6 @@ button {
                         nameElement.textContent = "Name: " + item.Name;
                         displayArea.appendChild(nameElement);
 
-                        const albumElement = document.createElement("p");
-                        albumElement.textContent = "Album: " + item.Album;
-                        displayArea.appendChild(albumElement);
 
                         const artistElement = document.createElement("p");
                         artistElement.textContent = "Artist: " + item.Artist;
@@ -244,19 +249,20 @@ button {
         }
     });
     searchForm.addEventListener('submit', async (event) => {
-            console.log("todo bien");
-            event.preventDefault(); // Empêcher la soumission du formulaire
+        //console.log("todo bien");
+        event.preventDefault(); // Empêcher la soumission du formulaire
 
-            const query = userInput.value;
-            const response = await  fetch(`http://localhost:5000/api/propose-feeling?query=${query}`, {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            //'Content-Type': 'application/json',
-        },
-        mode: 'cors', // Active les requêtes CORS
-    })
-    if (response.ok) {
+        const query = userInput.value;
+
+        const response = await fetch(`http://localhost:5000/api/propose-feeling?query=${query}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                //'Content-Type': 'application/json',
+            },
+            mode: 'cors', // Active les requêtes CORS
+        })
+        if (response.ok) {
             const jsonData = await response.json();
             const displayArea = document.getElementById("propositions_mood");
 
@@ -268,10 +274,6 @@ button {
                         nameElement.textContent = "Name: " + item.Name;
                         displayArea.appendChild(nameElement);
 
-                        const albumElement = document.createElement("p");
-                        albumElement.textContent = "Album: " + item.Album;
-                        displayArea.appendChild(albumElement);
-
                         const artistElement = document.createElement("p");
                         artistElement.textContent = "Artist: " + item.Artist;
                         displayArea.appendChild(artistElement);
@@ -284,51 +286,41 @@ button {
     });
 
     searchForm.addEventListener('submit', async (event) => {
-            console.log("todo bien");
-            event.preventDefault(); // Empêcher la soumission du formulaire
+        //console.log("todo bien");
+        event.preventDefault(); // Empêcher la soumission du formulaire
 
-            const query = userInput.value;
-            const response = await  fetch(`http://localhost:5000/api/pop?query=${query}`, {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            //'Content-Type': 'application/json',
-        },
-        mode: 'cors', // Active les requêtes CORS
-    })
-    const query2 = userInput2.value;
-            const response2 = await  fetch(`http://localhost:5000/api/pop?query=${query2}`, {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            //'Content-Type': 'application/json',
-        },
-        mode: 'cors', // Active les requêtes CORS
-    })
-    if (response.ok) {
-            const jsonData = await response.json();
-            const displayArea = document.getElementById("propositions_pop");
+        const query = userInput.value;
+        const query2 = userInput2.value;
+        //console.log(query2==="")
+        if ((query2 !== "") && (query !== "")) {
+            const response = await fetch(`http://localhost:5000/api/pop?query=${query}&query2=${query2}`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    //'Content-Type': 'application/json',
+                },
+                mode: 'cors', // Active les requêtes CORS
+            })
+            if (response.ok) {
+                const jsonData = await response.json();
+                const displayArea = document.getElementById("propositions_pop");
 
-            if (Array.isArray(jsonData)) {
-                displayArea.innerHTML = '';
-                jsonData.forEach(item => {
-                    if (item.hasOwnProperty("Name")) {
-                        const nameElement = document.createElement("p");
-                        nameElement.textContent = "Name: " + item.Name;
-                        displayArea.appendChild(nameElement);
+                if (Array.isArray(jsonData)) {
+                    displayArea.innerHTML = '';
+                    jsonData.forEach(item => {
+                        if (item.hasOwnProperty("Name")) {
+                            const nameElement = document.createElement("p");
+                            nameElement.textContent = "Name: " + item.Name;
+                            displayArea.appendChild(nameElement);
 
-                        const albumElement = document.createElement("p");
-                        albumElement.textContent = "Album: " + item.Album;
-                        displayArea.appendChild(albumElement);
-
-                        const artistElement = document.createElement("p");
-                        artistElement.textContent = "Artist: " + item.Artist;
-                        displayArea.appendChild(artistElement);
-                        
-                    }
-                });
-            } else {
-                displayArea.textContent = "JSON data is not an array.";
+                            const artistElement = document.createElement("p");
+                            artistElement.textContent = "Artist: " + item.Artist;
+                            displayArea.appendChild(artistElement);
+                        }
+                    });
+                } else {
+                    displayArea.textContent = "JSON data is not an array.";
+                }
             }
         }
     });
