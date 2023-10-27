@@ -1,6 +1,3 @@
-import pandas as pd
-import numpy as np
-from Cleaning_data import importing_data
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
@@ -17,28 +14,14 @@ def predicting_data_and_fitting(data):
     gradient_boosting = GradientBoostingRegressor(n_estimators=100,
                                                   random_state=0)  # You can adjust n_estimators and other hyperparameters as needed
     gradient_boosting.fit(X_train_standardized, y_train)
-    y_pred = gradient_boosting.predict(X_test_standardized)
+    """y_pred = gradient_boosting.predict(X_test_standardized)
     print(y_pred, y_test)
     rmse = np.sqrt(mean_squared_error(y_test, y_pred))
     print("RMSE score:", rmse)
 
     R2 = r2_score(y_test, y_pred)
-    print("R2 Score is :", R2)
-
-    """
-    knn = KNeighborsClassifier(n_neighbors=1)
-
-    # Train the KNN classifier on the training data
-    knn.fit(X_train_standardized, y_train)
-
-    # Make predictions on the test data
-    y_pred = knn.predict(X_test_standardized)
-
-    # Calculate the accuracy of the model
-    accuracy = accuracy_score(y_test, y_pred)
-    print("Accuracy:", accuracy)
-    print("Y:", y_pred, y_test)"""
-
+    print("R2 Score is :", R2)"""
+    #KNN also had a great value but it looked more like a regressor problem
     return gradient_boosting
 
 
@@ -49,4 +32,4 @@ def plotting_values(data):
     plt.ylabel('Popularity')
     plt.show()
 
-predicting_data_and_fitting(importing_data())
+#predicting_data_and_fitting(importing_data())
