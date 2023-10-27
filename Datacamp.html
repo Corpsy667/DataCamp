@@ -16,6 +16,7 @@
         <form id="search-form">
             <div class="search-container">
                 <input type="text" id="userInput" placeholder="Donnez vos musiques :">
+                <input type="text" id="userInput2" placeholder="Donnez vos musiques :">
                 <button type="submit">Rechercher</button>
             </div>
         </form>
@@ -32,6 +33,9 @@
         </div>
         <h3> Propositions mood :</h3>
         <div id="propositions_mood" class="container2">
+        </div>
+        <h3> Propositions popularité :</h3>
+        <div id="propositions_pop" class="container2">
         </div>
 
 </body>
@@ -110,6 +114,8 @@ button {
 
 
     const userInput = document.getElementById('userInput');
+    const userInput2 = document.getElementById('userInput2');
+    const propositions_pop = document.getElementById('propositions_pop');
     const suggestions_artiste = document.getElementById('suggestions_artistes');
     const propositions_artistes = document.getElementById('propositions_artistes');
     const propositions_mood = document.getElementById('propositions_mood');
@@ -269,6 +275,56 @@ button {
                         const artistElement = document.createElement("p");
                         artistElement.textContent = "Artist: " + item.Artist;
                         displayArea.appendChild(artistElement);
+                    }
+                });
+            } else {
+                displayArea.textContent = "JSON data is not an array.";
+            }
+        }
+    });
+
+    searchForm.addEventListener('submit', async (event) => {
+            console.log("todo bien");
+            event.preventDefault(); // Empêcher la soumission du formulaire
+
+            const query = userInput.value;
+            const response = await  fetch(`http://localhost:5000/api/pop?query=${query}`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            //'Content-Type': 'application/json',
+        },
+        mode: 'cors', // Active les requêtes CORS
+    })
+    const query2 = userInput2.value;
+            const response2 = await  fetch(`http://localhost:5000/api/pop?query=${query2}`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            //'Content-Type': 'application/json',
+        },
+        mode: 'cors', // Active les requêtes CORS
+    })
+    if (response.ok) {
+            const jsonData = await response.json();
+            const displayArea = document.getElementById("propositions_pop");
+
+            if (Array.isArray(jsonData)) {
+                displayArea.innerHTML = '';
+                jsonData.forEach(item => {
+                    if (item.hasOwnProperty("Name")) {
+                        const nameElement = document.createElement("p");
+                        nameElement.textContent = "Name: " + item.Name;
+                        displayArea.appendChild(nameElement);
+
+                        const albumElement = document.createElement("p");
+                        albumElement.textContent = "Album: " + item.Album;
+                        displayArea.appendChild(albumElement);
+
+                        const artistElement = document.createElement("p");
+                        artistElement.textContent = "Artist: " + item.Artist;
+                        displayArea.appendChild(artistElement);
+                        
                     }
                 });
             } else {

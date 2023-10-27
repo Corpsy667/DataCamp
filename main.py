@@ -1,6 +1,8 @@
 import Cleaning_data
 import pandas as pd
 from textblob import TextBlob
+from Musixmatch import search_lyrics
+from Machine_learning import predicting_data_and_fitting
 
 
 test = Cleaning_data.importing_data()
@@ -38,8 +40,7 @@ def search_music():
         query = request.args.get('query')
         if query is not None:
             # Par exemple, supposez que "database" est votre DataFrame
-            results = data[data['Name'].str.lower().str.startswith(query.lower())][:3]
-            
+            results = data[data['Name'].str.lower().str.startswith(query.lower())]
             suggestionsjson = results.to_dict(orient='records')
 
             # Renvoyez les suggestions au format JSON
@@ -102,6 +103,7 @@ def propose_mood():
         query = request.args.get('query')
         if query is not None:
             results = data[data['Name'].str.lower().str.startswith(query.lower())]
+            #results = search_lyrics(query, "Adele")
             sent = dffeeling(results)
             suggestionsjson = sent.to_dict(orient='records')
             return jsonify(suggestionsjson)
@@ -112,6 +114,32 @@ def propose_mood():
         app.logger.error(f"Erreur de recherche : {str(e)}")
         return "Erreur interne du serveur", 500
 
+
+@app.route('/api/pop', methods=['GET'])
+def predict_pop():
+    try :
+        query = request.args.get('query')
+        query2 = request.args.get('query2')
+        if query is not None:
+            results = search_lyrics(query, query2)
+            grad = predicting_data_and_fitting(data)
+
+            user_sentiment = TextBlob(results.sentiment.polarity)
+            user_pop = grad.predict(user_sentiment)
+        
+            data['Difference_pop'] = abs( data['Popularity'] - user_pop )
+            
+            # Sélection des trois chansons avec les sentiments les plus proches de celles saisies par l'utilisateur
+            reco = data.sort_values(by='Difference_pop').head(3)
+
+            suggestionsjson = reco.to_dict(orient='records')
+            return jsonify(suggestionsjson)
+        else:
+            return jsonify([])
+
+    except Exception as e:
+        app.logger.error(f"Erreur de recherche : {str(e)}")
+        return "Erreur interne du serveur", 500
 
 if __name__ == "__main__":
     app.run()
