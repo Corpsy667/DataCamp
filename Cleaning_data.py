@@ -11,13 +11,15 @@ def importing_data():
     filtered_df = df[mask]
     filtered_df.reset_index(inplace = True)
     filtered_df.drop(labels = "index", axis = 1)
-    mots_a_effacer = ['\n', 'Verse 1]', '[Verse 2]',"[Verse 3]","[Outro]","[Chorus]", "[Intro]","Intro]","Chorus]","[Drop]","]","[","    ","'   ",'\r']
+    mots_a_effacer = ['\n', 'Verse 1]', '[Verse 2]',"[Verse 3]","[Outro]","[Chorus]", "[Intro]","Intro]","Chorus]","[Drop]","]","[","    ","'   "]
     mot_remp = ["(",")"]
     filtered_df.loc[:, 'Lyrics'] = filtered_df['Lyrics'].apply(lambda x: effacer_mots(x, mots_a_effacer))
     filtered_df.loc[:, 'Lyrics'] = filtered_df['Lyrics'].apply(lambda x: remplace(x, mot_remp))
     filtered_df = filtered_df.copy()
     filtered_df.loc[:, 'Sentiment'] = filtered_df['Lyrics'].apply(lambda x: TextBlob(x).sentiment.polarity)
-    #print("filtered_df", filtered_df)
+    #print(filtered_df.shape)
+    filtered_df.drop_duplicates(subset=['Name', 'Artist'], keep='first', inplace=True)
+    #print(filtered_df.shape)
     return filtered_df
 # Fonction pour effacer les mots
 def effacer_mots(texte, mots_a_effacer):
@@ -31,3 +33,4 @@ def remplace(texte, mot_remp):
     return texte
 
 
+#importing_data()
