@@ -39,10 +39,17 @@ def search_lyrics(track_name, artist_name):
 
 
 # Utilisation de la fonction pour rechercher les paroles d'une chanson
-
-track_name = "HAPPY"
-artist_name = "NF"
-lyrics = search_lyrics(track_name, artist_name)
-
+"""lyrics = None
+while (lyrics is None):
+    try:
+        track_name = input(f"Entrez le nom de la chanson, que des minuscules: ")
+        artist_name = input(f"Entrez le nom de l'artiste, que des minuscules:")
+        lyrics = search_lyrics(track_name, artist_name)
+        # Extraire les paroles (Lyrics) des chansons saisies par l'utilisateur
+        user_song_lyrics = []
+        if lyrics:
+            user_song_lyrics.append(lyrics)
+    except:
+        lyrics = None
 if lyrics:
-    print(lyrics)
+    print(lyrics)"""
